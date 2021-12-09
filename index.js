@@ -6,6 +6,7 @@ const PORT = 5001;
 //Import HTTP para funcionamiento de modulos
 const { Server: HttpServer } = require('http');
 const { Server: IOServer } = require('socket.io');
+const { log } = require('console');
 
 //Inicializacion del server
 const app = express();
@@ -14,7 +15,12 @@ const app = express();
 const httpServer = new HttpServer(app);
 
 // Pasamos nuestra instacia a SocketIO
-const io = new IOServer(httpServer);
+const ioServer = new SocketIO(httpServer);
+
+ioServer.on('connection', socket => {
+    socket.emit("sms", "Welcome user 😜")
+    console.log(`Nuevo usuario conectado ${socket.id}`);
+})
 
 //settings
 app.use(express.json());
