@@ -1,7 +1,7 @@
 const express = require('express');
 let {Server: SocketIO} = require("socket.io");
 let path = require("path");
-const PORT = 3000;
+const PORT = 5001;
 
 //Import HTTP para funcionamiento de modulos
 const { Server: HttpServer } = require('http');
@@ -23,10 +23,10 @@ app.use(express.static("./public"));
 
 //EJS
 app.set("views", path.join(__dirname, "views"));
-app.set("view engine", ejs);
+app.set("view engine", "ejs");
 
 app.get("/", (req, res, next) => {
-    res.sendFile('index', {});
+    res.render('index', {});
 });
 
 //Inicializar funcion express
